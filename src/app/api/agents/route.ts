@@ -7,13 +7,15 @@ import { pull } from "langchain/hub"
 import { AgentExecutor, createToolCallingAgent } from "langchain/agents";
 import { NextResponse } from "next/server";
 import { SerpAPI } from "@langchain/community/tools/serpapi";
-
+import { ChatMessageHistory } from "langchain/stores/message/in_memory";
+import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 
 export async function POST(req: Request){
 
     const body = await req.json();
-    const message = body.messages;
-
+    const messages = body.messages;
+    const input: string= body.input
+    const messageHistory = new ChatMessageHistory();
     const searchapi = new SerpAPI();
     const calcApi = new Calculator();
 
@@ -39,15 +41,29 @@ export async function POST(req: Request){
         tools
     })
 
-     // Log the input message
-    console.log("Input message:", message);
 
-    const result = await agentExecutor.invoke({
-         input: message
-    });
+    const agentWithMessageHistory = new RunnableWithMessageHistory({
+        runnable: agentExecutor,
+        getMessageHistory: (sessionId)=> messageHistory,
+        inputMessagesKey: "input",
+        historyMessagesKey: "chat_history",
+    })
+
+    
+
+    const result = await agentWithMessageHistory.invoke(
+        {
+        input: input,
+        chat_history: {...messages}
+        },
+        {
+            configurable: {
+                sessionId: "foo",
+            },
+        }
+    )
  
-     // Log the result
-    console.log("Result:", result);
+    
 
     return NextResponse.json({ok: true, message: result})
 }

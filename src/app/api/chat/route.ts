@@ -4,7 +4,6 @@ import { InMemoryChatMessageHistory } from "@langchain/core/chat_history";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 
-
 const messageHistories: Record<string, InMemoryChatMessageHistory> = {};
 const models = new ChatOpenAI({ modelName: "gpt-4o" });
 
@@ -46,7 +45,7 @@ export async function POST(request: Request)
   const body = await request.json();
   const messages = body.messages;
   const input: string= body.input;
-  console.log(FormatMessage(messages))
+  // console.log(FormatMessage(messages))
   console.log(messages)
 
     const config = {
