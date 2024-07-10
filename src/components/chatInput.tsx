@@ -95,7 +95,7 @@ export default function ChatInput(props: {
     const SendLink = async() => {
         if(!Link.trim()) return;
 
-        const response = await fetch("api/retrival",
+        const response = await fetch("api/retrieval",
             {
                 method: "POST",
                 headers: {
