@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
     
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const data = ["Chat", "Structured Output", "Agents", "retrieval", "Retrieval Agents"];
+    const data = ["Chat", "Structured Output", "Agents", "retrieval", "RetrievalAgents"];
     return (
         <aside className="h-[100dvh] z-40">
             <div className="w-full h-full flex mr-0">
