@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
     
 export default function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const data = ["Chat", "Structured Output", "Agents", "retrieval", "RetrievalAgents"];
+    const data = ["Chat", "StructuredOutput", "Agents", "retrieval", "RetrievalAgents"];
     return (
         <aside className="h-[100dvh] z-40">
             <div className="w-full h-full flex mr-0">
@@ -17,7 +17,7 @@ export default function Sidebar() {
                 })}>
                     <div className="px-2 mt-4">
                         <Button 
-                            variant="ghost"
+                                variant="ghost"
                             size="icon"
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                         >

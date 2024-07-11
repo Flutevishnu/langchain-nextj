@@ -7,8 +7,8 @@ export default function retrival() {
         <>
         
             <ChatWindow
-                retrival={true}
-                endpoint="api/retrieval_agent"
+                retrival={false}
+                endpoint="api/structured_output"
             />
         </>
     )
