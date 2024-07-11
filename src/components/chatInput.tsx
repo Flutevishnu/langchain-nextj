@@ -86,7 +86,7 @@ export default function ChatInput(props: {
             ...prevState,
             {
                 role: "assistant",
-                content: data.message,
+                content: JSON.stringify(data.message),
             }
         ])                                                                                  
         
